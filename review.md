@@ -1,28 +1,39 @@
 // CREATE commands
 
-CREATE TABLE database_name (
-column names DATATYPE,
-etc.
-)
+    CREATE TABLE database_name (
+    column names DATATYPE,
+    etc.
+    )
 
-e.g. CREATE users (
-id SERIAL PRIMARY KEY,
-username VARCHAR(50)
-)
--- SERIAL will auto increment w each additional record insertion
+    e.g. CREATE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50)
+    )
+    -- SERIAL will auto increment w each additional record insertion
 
 // READ command(s)
 
-SELECT name FROM Cities WHERE name = "Austin"
-SELECT \* FROM Cities
+    e.g.
+    SELECT name FROM Cities WHERE name = "Austin"
+    SELECT \* FROM Cities
+    -can do calculations   and name calculation column
+        e.g. SELECT name, population / area  AS population_density
+             FROM cities
 
 // DELETE command(s)
 
+    DROP TABLE cities
+    DELETE FROM cities WHERE name = "Tokyo";
+
 // UPDATE command(s)
-INSERT INTO database_name (column name) VALUES value of what we want to add
-e.g. INSERT INTO cities (name, country, population, area)
-VALUES
-('Delhi, 'India', 28)
+
+    UPDATE cities SET population = blahblahblah WHERE name = "Tokyo"
+        -in this case only one city  has the name Tokyo
+
+    INSERT INTO database_name (column name) VALUES value of what we want to add
+    e.g. INSERT INTO cities (name, country, population, area)
+    VALUES
+    ('Delhi, 'India', 28)
 
 // RELATIONSHIPS
 
@@ -38,6 +49,7 @@ VALUES
 
 
     // Primary Keys and Foreign Keys
+
         - Primary keys used uniquely identify a row of a record
         -Foreign keys used to identify a row with an another row of an associated TABLE
             CREATE TABLE photos (
@@ -45,18 +57,41 @@ VALUES
             url VARCHAR(200)
             user_id INTEGER REFERENCES users(id) (can also set DELETE CONTRAINTS see below)
             )
+
         -Queries to run with Associated Data
             SELECT * FROM data-base-name WHERE table1_id = 4
                 --like all photos from one user (WHERE user_id=4)
-    -DELETE constraints
-        ON DELETE NO  ACTION (default)/ON DELETE RESTRICT
-            - throws error
-        ON DELETE CASCADE
-            - delete the record in the one table (in one to many relationship) , deletes all associated reocrds  (user and photos)
-        ON DELETE SET NULL
-            - set the foregin key to null when parent table/record is deleted
-        ON  DELETE SET DEFAULT NULL
-            -  - set the foregin key to a default valye if one is provided when parent table/record is deleted
+
+        -DELETE constraints
+            ON DELETE NO  ACTION (default)/ON DELETE RESTRICT
+                - throws error
+            ON DELETE CASCADE
+                - delete the record in the one table (in one to many relationship) , deletes all associated reocrds  (user and photos)
+            ON DELETE SET NULL
+                - set the foregin key to null when parent table/record is deleted
+            ON  DELETE SET DEFAULT NULL
+                -  - set the foregin key to a default valye if one is provided when parent table/record is deleted
+
     //JOIN statements
-         e.g. SELECT url, username FROM photos
+      -INNER JOINS
+         e.g. SELECT url, username
+              FROM photos
               JOIN users ON users.id  = photos.user_id
+
+              SELECT contents, username
+              FROM comments
+              JOIN users ON users.id = comments.user_id;
+
+              --if there is no match, the row is not returned in our query
+        -LEFT JOIN
+            SELECT url, username
+              FROM photos
+              LEFT JOIN users ON users.id  = photos.user_id
+                --if there is no match, the row is returned w null values respectively
+                -- in example it's returning all records of photos
+        -RIGHT JOIN
+            -- same as above, but opposite, any mismatched rows are not returned, but all records from 'right' table
+        -FULL JOIN
+            -- joins all records from both tables and any non corresponding records get NULL values set respectively
+
+        -Can add WHERE statement at THE END of the query to filter out whatever
