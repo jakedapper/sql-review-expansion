@@ -1,29 +1,28 @@
-//  CREATE commands
+// CREATE commands
 
 CREATE TABLE database_name (
-    column names DATATYPE,
-    etc.
+column names DATATYPE,
+etc.
 )
 
-e.g.  CREATE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(50)
+e.g. CREATE users (
+id SERIAL PRIMARY KEY,
+username VARCHAR(50)
 )
-    -- SERIAL will auto increment w each additional record insertion
+-- SERIAL will auto increment w each additional record insertion
 
-//  READ command(s)
+// READ command(s)
 
 SELECT name FROM Cities WHERE name = "Austin"
-SELECT * FROM Cities
+SELECT \* FROM Cities
 
 // DELETE command(s)
 
-
-
 // UPDATE command(s)
 INSERT INTO database_name (column name) VALUES value of what we want to add
-
-
+e.g. INSERT INTO cities (name, country, population, area)
+VALUES
+('Delhi, 'India', 28)
 
 // RELATIONSHIPS
 
@@ -49,7 +48,7 @@ INSERT INTO database_name (column name) VALUES value of what we want to add
         -Queries to run with Associated Data
             SELECT * FROM data-base-name WHERE table1_id = 4
                 --like all photos from one user (WHERE user_id=4)
-    -DELETE constraints 
+    -DELETE constraints
         ON DELETE NO  ACTION (default)/ON DELETE RESTRICT
             - throws error
         ON DELETE CASCADE
@@ -61,5 +60,3 @@ INSERT INTO database_name (column name) VALUES value of what we want to add
     //JOIN statements
          e.g. SELECT url, username FROM photos
               JOIN users ON users.id  = photos.user_id
-
-
