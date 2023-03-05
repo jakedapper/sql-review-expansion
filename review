@@ -1,0 +1,5 @@
+//  READ command(s)
+
+SELECT name FROM Cities WHERE name = "Austin"
+SELECT * FROM Cities
+
