@@ -95,3 +95,11 @@
             -- joins all records from both tables and any non corresponding records get NULL values set respectively
 
         -Can add WHERE statement at THE END of the query to filter out whatever
+            SELECT url, contents
+            FROM comments
+            JOIN photos ON photos.id = comments.photo_id
+            WHERE comments.user_id = photos.user_id;
+                -- this is joining comments and photos where the user id of the comment is the user id of the photo
+
+        -Three Way Joins
+
