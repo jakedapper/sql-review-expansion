@@ -116,3 +116,60 @@ ex. find the number of comments for each photo
     SELECT photo_id, COUNT(*)
     FROM comments
     GROUP BY photo_id;
+
+ex. write a query that prints an authors name (rather than ID) and the number of books they have authored
+
+    SELECT name, COUNT(*)
+    FROM books
+    JOIN authors ON authors.id = books.author_id
+    GROUP BY authors.name;
+
+    ---HAVING-----
+    filters queries using GROUP BY *will only see HAVING when there is a GROUP BY*
+    typically includes an aggregate keyword
+
+    ex. find the number of comments for each photo where the photo_id is less than 3 (will use WHERE because it deals with the value of a row) and the photo has more than 2 comments (will use HAVING because it uses an aggregate function and some filtering)
+
+    SELECT photo_id, COUNT(*)
+    FROM comments
+    WHERE photo_id < 3
+    GROUP BY photo_id
+    HAVING COUNT(*) > 2
+
+    ex. find users (user_ids) whhere the user has commented on the first 50 photos and the user added more than to 20 comments on those photos
+
+    SELECT user_id, COUNT(*)
+    FROM comments
+    WHERE photo_id < 50
+    GROUP BY user_id
+    HAVING  COUNT(*) > 20
+
+    ex. Given a table of phones, print the names of manufacturers and total revenue (price * units_sold) for all phones.  Only print the manufacturers who have revenue greater than 2,000,000 for all the phones they sold.
+
+    SELECT manufacture, SUM(price * units_sold)
+    FROM phones
+    GROUP BY manufacturer
+    HAVING SUM(price * units_sold) > 2000000
+
+MISC SORTING
+
+    ORDER BY (column name)
+        --can add DESC for descending result
+        --default is ascending
+
+    OFFSET
+        -- skips x number of rows
+
+        SELECT *
+        FROM users
+        OFFSET 40;
+
+    LIMIT
+        -- only takes certain number of rows  for query
+        -- would use if needed top x records (most expensive or something)
+
+        SELECT *
+        FROM users
+        LIMIT 2;
+
+    *by convention we would put LIMIT first if using both
