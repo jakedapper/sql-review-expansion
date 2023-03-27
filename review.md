@@ -102,4 +102,17 @@
                 -- this is joining comments and photos where the user id of the comment is the user id of the photo
 
         -Three Way Joins
+            SELECT url, contents, username
+            FROM comments
+            JOIN photos ON photos.id = comments.photo_id
+            JOIN users ON users.id = comments.user_id AND users.id = photos.user_id
+            WHERE comments.user_id = photos.user_id;
 
+// Grouping -
+cannot select any column BUT the one it is grouped by
+
+ex. find the number of comments for each photo
+
+    SELECT photo_id, COUNT(*)
+    FROM comments
+    GROUP BY photo_id;
