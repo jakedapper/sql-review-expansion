@@ -172,4 +172,22 @@ MISC SORTING
         FROM users
         LIMIT 2;
 
-    *by convention we would put LIMIT first if using both
+    * by convention we would put LIMIT first if using both *
+
+// WORKING WITH MULTIPLE SETS OF DATA
+
+    UNION
+
+    - put () around multiple queries
+    - joins results of two wueries and removes duplicate rows
+    - UNION ALL includes duplicate rows
+
+    INTERSECT
+
+    - finds rows in common in results of two queries - removes duplicates
+    - INTERSECT ALL includes duplicates
+
+    EXCEPT
+
+    - find rows that are present in first query but not second - removes duplicates
+    - EXVEPT ALL does the same but includes duplicates
