@@ -191,3 +191,25 @@ MISC SORTING
 
     - find rows that are present in first query but not second - removes duplicates
     - EXVEPT ALL does the same but includes duplicates
+
+// Subqueries
+
+    SELECT name, price
+    FROM products
+    WHERE price > (
+        SELECT MAX(price) FROM productes WHERE departmeent = 'Toys'
+    );
+
+    -Understanding the shape of a queery result is key
+
+        SELECT *
+        FROM orders
+            --many rows, many columns
+
+        SELECT id
+        FROM orders
+            --many rows, one column
+
+        SELECT COUNT(*)
+        FROM orders
+            --one row, one column (single value aka it's a scalar query)
